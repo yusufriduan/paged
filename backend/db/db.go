@@ -1,22 +1,29 @@
 package db
 
 import (
+	"fmt"
 	"log"
 	"os"
-	"github.com/lengzuo/supa"
+	
+
+	supabase "github.com/lengzuo/supa"
 )
 
-// One global reference to the supa client instance
-var Conf *supa.ClientConf
+// Global reference to the supa client instance
+var Conf *supabase.Client
 
 func InitSupabase() {
-	projectURL := os.Getenv("SUPABASE_URL")
-	secretKey := os.Getenv("SUPABASE_SECRET_KEY")
-
-	// Initialize
-	var err error
-	Conf, err = supa.Init(projectURL, secretKey)
-	if err != nil {
-		log.Fatalf("Failed to initialize supa client: %v", err)
+	conf := supabase.Config{
+		ApiKey:     os.Getenv("SUPABASE_SECRET_KEY"),
+		ProjectRef: os.Getenv("SUPABASE_URL"),
+		Debug:      true,
 	}
+
+	var err error
+	Conf, err = supabase.New(conf)
+	if err != nil {
+		log.Fatalf("failed in init supa client: %v", err)
+	}
+
+	fmt.Println("Supabase client initialized successfully")
 }
