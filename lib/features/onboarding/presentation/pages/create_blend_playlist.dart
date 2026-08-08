@@ -10,8 +10,8 @@ class CreateBlend extends StatefulWidget {
 }
 
 class _CreateBlendState extends State<CreateBlend> {
-  final TextEditingController _groupNameController = TextEditingController();
-  final TextEditingController _groupLinkController = TextEditingController();
+  final TextEditingController _blendNameController = TextEditingController();
+  final TextEditingController _blendLinkController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,63 +19,78 @@ class _CreateBlendState extends State<CreateBlend> {
       body: SafeArea(
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Let's set one up for you!",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Let's set one up for you!",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Text(
+                              "What's your blend playlist name?",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 50),
+                            CustomTextField(
+                              controller: _blendNameController,
+                              hintText: 'Blend Playlist Name',
+                            ),
+                            const SizedBox(height: 100),
+                            CustomTextField(
+                              enabled: false,
+                              controller: _blendLinkController,
+                              hintText: 'Generated Blend Playlist Link',
+                              variant: TextFieldVariant.withButton,
+                              actionIcon: const Icon(Icons.copy, size: 20),
+                              onActionPressed: () {
+                                // copy link
+                                debugPrint('Copy button pressed with link: ${_blendLinkController.text}');
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            const Text(
+                              "Psst! Share this link with your friends to join the playlist!",
+                              style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                            ),
+                            const SizedBox(height: 20),
+                            CustomButton(
+                              text: 'Finish',
+                              onPressed: () {
+                                // Handle finish action
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const Text(
-                      "What's your Playlist name?",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 50),
-                    CustomTextField(
-                      controller: _groupNameController,
-                      hintText: 'Playlist Name',
-                    ),
-                    const SizedBox(height: 100),
-                    CustomTextField(
-                      enabled: false,
-                      controller: _groupLinkController,
-                      hintText: 'Generated Playlist Link',
-                      variant: TextFieldVariant.withButton,
-                      actionIcon: const Icon(Icons.copy),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Psst! Share this link with your friends to join the playlist!",
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: 'Finish',
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20.0, left: 10.0),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    // Navigate to Group Link Invitation page
+                    Navigator.pop(context);
                   },
                 ),
               ),

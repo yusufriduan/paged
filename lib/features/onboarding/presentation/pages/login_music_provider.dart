@@ -2,13 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:paged/features/components/custom_buton.dart';
 
 class LoginMusicProvider extends StatefulWidget {
-  const LoginMusicProvider({super.key});
+  final int pageIndex;
+  final int currentPage;
+  final VoidCallback onNext;
+  const LoginMusicProvider({super.key, required this.pageIndex, required this.currentPage, required this.onNext});
 
   @override
   State<LoginMusicProvider> createState() => _LoginMusicProviderState();
 }
 
 class _LoginMusicProviderState extends State<LoginMusicProvider> {
+  Widget _buildDots() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(3, (i) {
+        final active = i == widget.currentPage;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          height: 6,
+          width: active ? 20 : 6,
+          decoration: BoxDecoration(
+            color: active ? Colors.blue : Color(0xFFD8D8D8),
+            borderRadius: BorderRadius.circular(3),
+          ),
+        );
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,43 +49,20 @@ class _LoginMusicProviderState extends State<LoginMusicProvider> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 300),
+              SizedBox(height: 280),
+              _buildDots(),
+              SizedBox(height: 50),
               CustomButton(
                 text: 'Connect with Spotify',
-                onPressed: () {},
+                onPressed: widget.onNext,
                 variant: ButtonVariant.outlined,
-                style: ButtonStyle(
-                  side: WidgetStateBorderSide.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-                      return const BorderSide(color: Colors.black, width: 2);
-                    }
-                    return const BorderSide(color: Colors.grey, width: 1);
-                  }),
-                  foregroundColor: WidgetStateColor.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-                      return Colors.black;
-                    }
-                    return Colors.grey;
-                  }),
-                  backgroundColor: WidgetStateColor.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-                      return const Color.fromARGB(255, 30, 215, 96);
-                    }
-                    return Colors.transparent;
-                  }),
-                  textStyle: WidgetStateTextStyle.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-                      return const TextStyle(color: Colors.black);
-                    }
-                    return const TextStyle(color: Colors.grey);
-                  }),
-                ),
               ),
               SizedBox(height: 20),
               CustomButton(
                 text: 'Connect with Youtube Music',
                 onPressed: () {
                   // Handle Youtube Music login
+                  widget.onNext();
                 },
                 variant: ButtonVariant.outlined,
               ),

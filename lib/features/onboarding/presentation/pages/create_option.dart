@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:paged/features/onboarding/presentation/pages/create_blend_playlist.dart';
+import 'package:paged/features/onboarding/presentation/pages/create_jam_session.dart';
 import 'package:paged/features/components/custom_buton.dart';
 
 class CreateOption extends StatefulWidget {
@@ -33,6 +35,7 @@ class _CreateOptionState extends State<CreateOption> {
                       text: "Create Blend Playlist",
                       onPressed: () {
                         // Navigate to Create Blend Playlist page
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => CreateBlend()));
                       },
                     ),
                     SizedBox(height: 20),
@@ -40,6 +43,7 @@ class _CreateOptionState extends State<CreateOption> {
                       text: "Create Jam Session",
                       onPressed: () {
                         // Navigate to Create Jam Session page
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => CreateJam()));
                       },
                     ),
                   ],
@@ -52,25 +56,8 @@ class _CreateOptionState extends State<CreateOption> {
                 padding: const EdgeInsets.only(top: 20.0, left: 10.0),
                 child: IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    // Navigate to Group Link Invitation page
-                  },
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: TextButton(
-                  child: Text("I have an invitation link",
-                    style: TextStyle(
-                      fontSize: 16,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  onPressed: () {
-                    // Navigate to Group Link Invitation page
+                  onPressed:() {
+                    Navigator.pop(context);
                   },
                 ),
               ),

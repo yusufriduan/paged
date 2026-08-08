@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paged/features/onboarding/presentation/pages/create_option.dart';
+import 'package:paged/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:paged/themes/light.dart';
 import 'package:paged/themes/dark.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Paged',
       theme: lightMode,
       darkTheme: darkMode,
-      home: CreateOption(),
+      home: OnboardingScreen(),
     );
   }
 }

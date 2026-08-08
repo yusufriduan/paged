@@ -65,24 +65,20 @@ class CustomTextField extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              SizedBox(
+              Container(
                 width: 30,
                 height: 30,
-                child: Material(
-                  color: const Color(0xFFD9D9D9),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(10),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    onTap: onActionPressed,
-                    child: Center(
-                      child: Icon(
-                        actionIcon?.icon ?? Icons.arrow_forward,
-                        size: 20,
-                        weight: 5000,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                ),
+                child: IconButton(
+                  onPressed: onActionPressed,
+                  icon: actionIcon ?? const Icon(Icons.arrow_forward, size: 20),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints.tightFor(width: 30, height: 30),
+                  splashRadius: 18,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
             ],
