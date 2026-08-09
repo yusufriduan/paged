@@ -23,6 +23,7 @@ func init() {
 
 	r.Route("/api", func(r chi.Router) {
 		r.Post("/login", controllers.Login)
+		r.Post("/logout", controllers.Logout)
 		r.Post("/create_blend", controllers.CreateBlend)
 		r.Get("/join_blend", controllers.JoinBlend)
 		r.Post("/recalculate_blend", controllers.RecalculateBlend)

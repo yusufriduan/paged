@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:paged/features/components/custom_text_field.dart';
 import 'package:paged/features/components/custom_buton.dart';
 
+import 'package:paged/features/home/presentation/pages/home.dart';
+
 class CreateJam extends StatefulWidget {
   const CreateJam({super.key});
 
@@ -73,6 +75,8 @@ class _CreateJamState extends State<CreateJam> {
                               text: 'Finish',
                               onPressed: () {
                                 // Handle finish action
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                               },
                             ),
                           ],
@@ -92,18 +96,6 @@ class _CreateJamState extends State<CreateJam> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextButton(
-                  onPressed: () {
-                    // logout
-                  },
-                  child: const Text('Logout'),
                 ),
               ),
             ),

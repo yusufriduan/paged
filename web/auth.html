@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authentication Complete</title>
+</head>
+<body>
+  <h3 id="message">Processing...</h3>
+  <script>
+    window.onload = function() {
+      try {
+        // 1. Check if the browser severed the connection to the main app
+        if (!window.opener) {
+          document.getElementById("message").innerText = "Error: window.opener is null. (Browser security blocked the connection)";
+          return;
+        }
+        
+        // 2. Send the URL back to Flutter
+        window.opener.postMessage(window.location.href, window.location.origin);
+        document.getElementById("message").innerText = "Success! Handshake complete. Closing window...";
+        
+        // 3. Force the window to close
+        setTimeout(function() { window.close(); }, 500);
+
+      } catch (e) {
+        document.getElementById("message").innerText = "JS Error: " + e.message;
+      }
+    };
+  </script>
+</body>
+</html>

@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/go-chi/cors v1.2.2 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/rs/zerolog v1.32.0 // indirect
